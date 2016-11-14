@@ -13,9 +13,39 @@ const RETURN_CODES = {
     info: "info"
 };
 
+const INT = "integer",
+    STRING = "string",
+    DATE = "Date",
+    REAL = "real",
+    SCATTERPLOT = "scatter-plot",
+    LINECHART = "line-chart",
+    VERTICALBARCHART = "vertical-bar-chart",
+    HORIZONTALBARCHART = "horizontal-bar-chart",
+    AREACHART = "area-chart";
+
+const CHARTS = {
+
+    "scatter-plot": [[INT, INT], [INT, REAL], [REAL, INT], [REAL, REAL]],
+    "line-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]],
+    "vertical-bar-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]],
+    "horizontal-bar-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]]
+};
+
 const fuzzy = require('./fuzzy');
 
-let terms = Terms.find().fetch();
+const f = (term, charts) => {
+    return {term, charts};
+};
+
+//FIXME aquisicao de termos eh estatica
+// let terms = Terms.find().fetch();
+let terms = [];
+
+terms.push(f("correlation", [SCATTERPLOT]));
+terms.push(f("deviation", [LINECHART]));
+terms.push(f("distribution", [LINECHART, VERTICALBARCHART]));
+terms.push(f("ranking", [HORIZONTALBARCHART]));
+terms.push(f("time series", [LINECHART, VERTICALBARCHART, AREACHART]));
 
 if(terms && terms.length > 0) {
 
@@ -41,12 +71,22 @@ Meteor.methods({
                 if(score === 1) {
 
                     // get word from database and discover if it has any associated chart
-                    let term = Terms.findOne({term: new RegExp(word, 'i')}),
-                        chartOptions = [];
+                    // FIXME
+                    // let term = Terms.findOne({term: new RegExp(word, 'i')}),
+                    let chartOptions = [];
 
-                    if(term.charts && term.charts.length > 0) {
+                    // procura pelo termo na lista de termos
+                    let result = terms.filter(term => word.match(new RegExp(term.term, "i")));
 
-                        chartOptions = term.charts;
+                    if(result.length >= 0) {
+
+                        result = result[0];
+
+                        // se o termo possui graficos listados, retorna-os
+                        if(result.charts && result.charts.length > 0) {
+
+                            chartOptions = result.charts;
+                        }
                     }
 
                     return {operation: "shouldShowChartOptions", chartOptions};

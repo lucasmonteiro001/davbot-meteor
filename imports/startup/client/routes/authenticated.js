@@ -25,6 +25,13 @@ const authenticatedRoutes = FlowRouter.group({
     triggersEnter: [ authenticatedRedirect ]
 });
 
+authenticatedRoutes.route( '/', {
+    name: 'index',
+    action() {
+        BlazeLayout.render( 'default', { yield: 'loader' } );
+    }
+});
+
 authenticatedRoutes.route( '/loader', {
     name: 'loader',
     action() {
