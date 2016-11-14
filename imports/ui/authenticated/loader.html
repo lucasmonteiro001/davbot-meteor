@@ -1,0 +1,130 @@
+<template name="loader">
+    {{_ "hello"}}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <label for="csvFile">CSV import</label>
+                <input type="file" name="csvFile" id="csvFile">
+            </div>
+
+            {{#if podeIrProxPagina}}
+                <a href="{{pathFor 'analysis'}}"><button class="btn btn-primary">Proximo</button></a>
+            {{/if}}
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="container-fluid">-->
+
+        <!--<div class="row">-->
+
+            <!--<div class="col-md-4">-->
+
+                <!--<div class="panel panel-success">-->
+
+                    <!--<div class="panel-body">-->
+                        <!--<div id='container-bar-chart'> </div>-->
+                    <!--</div>-->
+
+                    <!--<div class="panel-footer">-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Nome Crescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="nameASC" onchange="ordenaBarNameASC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Nome Decrescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="nameDSC" onchange="ordenaBarNameDSC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Valor Crescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="valueASC" onchange="ordenaBarValueASC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary active"> Valor Decrescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="valueDSC" onchange="ordenaBarValueDSC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="col-md-4">-->
+
+                <!--<div class="panel panel-success">-->
+                    <!--<div class="panel-body">-->
+                        <!--<div id='cool'> </div>-->
+                    <!--</div>-->
+
+                    <!--<div class="panel-footer">-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Nome Crescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="nameASC" onchange="ordenaNameASC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Nome Decrescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="nameDSC" onchange="ordenaNameDSC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary"> Valor Crescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="valueASC" onchange="ordenaValueASC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group" data-toggle="buttons">-->
+                            <!--<label class="btn btn-primary active"> Valor Decrescente-->
+                                <!--<input type="radio" name="order-options" autocomplete="off" value="valueDSC" onchange="ordenaValueDSC()" />-->
+                            <!--</label>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="col-md-4">-->
+
+                <!--<div class="panel panel-success">-->
+
+                    <!--<div class="panel-body">-->
+                        <!--<div id='container-visualizacao'> </div>-->
+                    <!--</div>-->
+
+
+
+                <!--</div>-->
+
+
+            <!--</div>-->
+
+        <!--</div>-->
+
+    <!--</div>-->
+</template>
