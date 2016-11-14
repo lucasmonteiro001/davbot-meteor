@@ -107,6 +107,16 @@ Meteor.methods({
 
         return formatMessage(RETURN_CODES.error, 'No word found!');
 
+    },
+    'chat.existsChart' (name) {
+
+        if(!CHARTS[name]) {
+            Meteor.error('Chart does not exist!');
+            return;
+        }
+
+        return CHARTS[name];
+
     }
 
 });

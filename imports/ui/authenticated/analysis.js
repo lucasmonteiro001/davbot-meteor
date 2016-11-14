@@ -14,6 +14,7 @@ Template.analysis.onCreated(() => {
     template = Template.instance();
 
     template.shouldShowChartOptions = new ReactiveVar(false);
+    template.chartOptions = new ReactiveVar(null);
 
     return;
     try {
@@ -67,6 +68,16 @@ Template.analysis.events({
 
         $chatMsg.val('');
 
+        // se o chat esta em modo de escolher um grafico
+        if(template.shouldShowChartOptions.get()) {
+
+            handleChart(msg);
+            return;
+        }
+
+        template.shouldShowChartOptions.set(false);
+        template.chartOptions.set(null);
+
         if(msg === "clear") {
             $chatMsg.find('p').remove();
         }
@@ -94,6 +105,9 @@ Template.analysis.events({
                 let chartOptions = "";
 
                 if(result.chartOptions && result.chartOptions.length > 0 ) {
+
+                    template.chartOptions.set(result.chartOptions);
+
                     //show chart options
                     chartOptions = result.chartOptions.map((chart, i) => {
                         return '\t' + i + ' - ' + chart;
@@ -138,4 +152,37 @@ const addToChat = function addToChat (text, isClient, type) {
 
     scrollChat($chat);
 
+};
+
+const handleChart = (msg) => {
+
+    let chartOption = Number(msg);
+
+    // Se nao eh uma opcao valida
+    if(isNaN(chartOption) || chartOption < 0 || chartOption > template.chartOptions.get().length - 1) {
+
+        addToChat("Invalid option!", false, 'danger');
+
+        template.shouldShowChartOptions.set(false);
+        template.chartOptions.set(null);
+
+        return;
+    }
+
+    // se eh um grafico valido, descobre seu nome
+    let chartName = template.chartOptions.get()[chartOption];
+
+    Meteor.call('chat.existsChart', chartName, (err, result) => {
+
+        if(err) {
+            addToChat(err.reason, false, 'danger');
+            return;
+        }
+
+        console.log(result);
+
+    });
+
+    template.shouldShowChartOptions.set(false);
+    template.chartOptions.set(null);
 };
