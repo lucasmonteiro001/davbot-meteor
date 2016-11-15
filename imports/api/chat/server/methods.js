@@ -21,14 +21,27 @@ const INT = "integer",
     LINECHART = "line-chart",
     VERTICALBARCHART = "vertical-bar-chart",
     HORIZONTALBARCHART = "horizontal-bar-chart",
-    AREACHART = "area-chart";
+    AREACHART = "area-chart",
+    BARCHART = "bar-chart",
+    PIECHART = "pie-chart";
 
 const CHARTS = {
 
-    "scatter-plot": [[INT, INT], [INT, REAL], [REAL, INT], [REAL, REAL]],
-    "line-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]],
-    "vertical-bar-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]],
-    "horizontal-bar-chart": [[STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]]
+    [SCATTERPLOT]: [
+        [INT, INT], [INT, REAL], [REAL, INT], [REAL, REAL]
+    ],
+    [LINECHART]: [
+        [STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]
+    ],
+    [VERTICALBARCHART]: [
+        [STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]
+    ],
+    [HORIZONTALBARCHART]: [
+        [STRING, INT], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT], [INT, REAL]
+    ],
+    [PIECHART]: [
+        [INT, REAL], [STRING, REAL], [DATE, INT], [DATE, REAL], [INT, INT]
+    ]
 };
 
 const fuzzy = require('./fuzzy');
@@ -46,6 +59,7 @@ terms.push(f("deviation", [LINECHART]));
 terms.push(f("distribution", [LINECHART, VERTICALBARCHART]));
 terms.push(f("ranking", [HORIZONTALBARCHART]));
 terms.push(f("time series", [LINECHART, VERTICALBARCHART, AREACHART]));
+terms.push(f("part-to-whole", [PIECHART, VERTICALBARCHART]));
 
 if(terms && terms.length > 0) {
 

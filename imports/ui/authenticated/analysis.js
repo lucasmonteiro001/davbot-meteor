@@ -3,8 +3,10 @@
  */
 import './analysis.html';
 import 'jquery-ui';
-import HorizontalBar from '../../../client/utilities/visualizations/HorizontalBar';
+import Charts from '../../../client/utilities/visualizations/Charts';
 import { Terms } from '../../api/terms/terms';
+
+console.log(Charts)
 
 const MAX_COLS = 2;
 
@@ -26,7 +28,6 @@ Template.analysis.onCreated(() => {
     // possiveis configuracoes para renderizar o grafico selecionado
     template.possibleColumns = new ReactiveVar(null);
 
-    return;
     try {
         if(!dataSet) {
             FlowRouter.go('loader');
@@ -301,7 +302,7 @@ const draw = () => {
     // limpa a area de grafico
     $("#chart").empty();
 
-    let barras = new HorizontalBar("#chart", values);
+    let barras = new Charts[template.chartName.get()]("#chart", values);
 
     console.log(values)
 
