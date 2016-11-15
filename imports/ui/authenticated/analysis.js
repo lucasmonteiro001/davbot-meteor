@@ -3,6 +3,7 @@
  */
 import './analysis.html';
 import 'jquery-ui';
+import HorizontalBar from '../../../client/utilities/visualizations/HorizontalBar';
 import { Terms } from '../../api/terms/terms';
 
 const MAX_COLS = 2;
@@ -296,6 +297,11 @@ const draw = () => {
         });
 
     }
+
+    // limpa a area de grafico
+    $("#chart").empty();
+
+    let barras = new HorizontalBar("#chart", values);
 
     console.log(values)
 
