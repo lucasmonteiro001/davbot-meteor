@@ -302,16 +302,19 @@ const draw = () => {
     // limpa a area de grafico
     $("#chart").empty();
 
-    let barras = new Charts[template.chartName.get()]("#chart", values);
+    let chartConstructor =  Charts[template.chartName.get()];
 
-    console.log(values)
+    // se o grafico selecionado ja foi implementado
+    if(chartConstructor) {
 
-    console.warn('desenhando')
-    console.log(template.chartName.get());
-    console.log(template.possibleColumns.get());
-    console.log(inferredValues);
-    console.log(isPossibleToRenderChart)
+        // cria o novo grafico
+        let chart = new chartConstructor("#chart", values);
+    }
+    else {
 
-//    reset()
+        addToChat('Chart not available yet!', false,  'danger');
+    }
+
+    reset();
 
 };
