@@ -13,8 +13,17 @@ Template.analysis.onCreated(() => {
 
     template = Template.instance();
 
+    // se o grafico possui algum grafico para renderizar
     template.shouldShowChartOptions = new ReactiveVar(false);
+
+    // nome do grafico para ser desenhado
+    template.chartName = new ReactiveVar(null);
+
+    // opcoes de graficos disponiveis para determinado termo
     template.chartOptions = new ReactiveVar(null);
+
+    // possiveis configuracoes para renderizar o grafico selecionado
+    template.possibleColumns = new ReactiveVar(null);
 
     return;
     try {
@@ -68,21 +77,43 @@ Template.analysis.events({
 
         $chatMsg.val('');
 
+        addToChat(msg, true);
+
+        if(msg === "clear") {
+
+            $('.result').find('p').remove();
+            return;
+        }
+
+        /**
+         * ESTADOS DA APLICACAO
+         */
         // se o chat esta em modo de escolher um grafico
         if(template.shouldShowChartOptions.get()) {
 
             handleChart(msg);
             return;
         }
+        // se o usuario tem opcoes disponiveis para escolher
+        else if(template.possibleColumns.get()) {
 
-        template.shouldShowChartOptions.set(false);
-        template.chartOptions.set(null);
+            let selectedColumns = getSelectedColumns();
 
-        if(msg === "clear") {
-            $chatMsg.find('p').remove();
+            // eh necessario selecionar 2 colunas
+            if(selectedColumns.length !== MAX_COLS) {
+
+                addToChat("Select " + MAX_COLS + " columns!", false, 'danger');
+                return;
+            }
+            else {
+
+                draw();
+            }
+
+            return;
         }
 
-        addToChat(msg, true);
+        reset();
 
         Meteor.call('chat.handleInputMsg', msg, (err, result) => {
 
@@ -163,8 +194,7 @@ const handleChart = (msg) => {
 
         addToChat("Invalid option!", false, 'danger');
 
-        template.shouldShowChartOptions.set(false);
-        template.chartOptions.set(null);
+        reset();
 
         return;
     }
@@ -179,10 +209,102 @@ const handleChart = (msg) => {
             return;
         }
 
-        console.log(result);
+        template.chartName.set(chartName);
+
+        template.possibleColumns.set(result);
+
+        // tenta desenhar o grafico se há o número necessário de colunas selecionadas
+        let selectedColumns = getSelectedColumns();
+
+        // eh necessario selecionar 2 colunas
+        if(selectedColumns.length !== MAX_COLS) {
+
+            addToChat("Select " + MAX_COLS + " columns!", false, 'danger');
+        }
+        else {
+
+            draw();
+        }
 
     });
 
+    reset();
+};
+
+const reset = () => {
     template.shouldShowChartOptions.set(false);
+    template.chartName.set(null);
     template.chartOptions.set(null);
+    template.possibleColumns.set(null);
+};
+
+const getSelectedColumns = () => {
+
+    let columns = $('input[type="checkbox"]');
+
+    let result = columns.map((i, el) => {
+
+        // descobre os indexes dos checkboxes marcados
+        if($(el).attr('disabled') != "disabled") {
+
+            return i;
+        }
+    });
+
+    return result;
+
+};
+
+const draw = () => {
+
+    let selectedColumns = getSelectedColumns(),
+        // obtem os valors inferidos para as colunas selecionadas
+        inferredValues = [dataSet.inferredValues[selectedColumns[0]], dataSet.inferredValues[selectedColumns[1]]];
+
+    let isPossibleToRenderChart = false;
+
+    // descobre se as colunas selecionadas podem gerar o grafico selecionado
+    for(let i = 0; i < template.possibleColumns.get().length; i++) {
+
+        if(template.possibleColumns.get()[i][0] == inferredValues[0]
+            && template.possibleColumns.get()[i][1] == inferredValues[1]) {
+
+            isPossibleToRenderChart = true;
+        }
+    }
+
+    if(!isPossibleToRenderChart) {
+
+        addToChat('Columns selected dont have the right type to render the chart! Please change columns.', false, 'warning');
+        return;
+    }
+
+    let values = [];
+
+    // montar dados, desconsidera a primeira linha que eh o header
+    for(let i = 1; i < dataSet.rowData.length; i++) {
+
+        let row = dataSet.rowData[i];
+
+        if(row.length < 2) {
+            break;
+        }
+
+        values.push({
+            key: row[selectedColumns[0]],
+            value: row[selectedColumns[1]],
+        });
+
+    }
+
+    console.log(values)
+
+    console.warn('desenhando')
+    console.log(template.chartName.get());
+    console.log(template.possibleColumns.get());
+    console.log(inferredValues);
+    console.log(isPossibleToRenderChart)
+
+//    reset()
+
 };
