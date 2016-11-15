@@ -307,6 +307,8 @@ const draw = () => {
     // se o grafico selecionado ja foi implementado
     if(chartConstructor) {
 
+        console.log(values)
+
         // cria o novo grafico
         let chart = new chartConstructor("#chart", values);
     }
