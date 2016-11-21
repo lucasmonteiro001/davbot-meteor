@@ -150,6 +150,7 @@ Template.analysis.events({
                 }
                 else {
                     addToChat('No available chart at this moment!', false, 'danger');
+                    reset();
                 }
             }
 

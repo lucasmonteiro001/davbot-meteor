@@ -60,6 +60,7 @@ terms.push(f("distribution", [LINECHART, VERTICALBARCHART]));
 terms.push(f("ranking", [HORIZONTALBARCHART]));
 terms.push(f("time series", [LINECHART, VERTICALBARCHART, AREACHART]));
 terms.push(f("part-to-whole", [PIECHART, VERTICALBARCHART]));
+terms.push(f("test", []));
 
 if(terms && terms.length > 0) {
 
