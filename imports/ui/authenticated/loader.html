@@ -1,22 +1,36 @@
 <template name="loader">
-    {{_ "hello"}}
+
+
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
-                <label for="csvFile">CSV import</label>
-                <input type="file" name="csvFile" id="csvFile">
+            {{_ "hello"}}
+        </div>
+
+        <div class="row">
+            <h3 for="csvFile">CSV import</h3>
+
+            <div class="col-md-4">
+                <p>First, upload your data to start analysing it.</p>
             </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <input style="display: inline-block;" type="file" name="csvFile" id="csvFile">
+                </div>
 
-            {{#if podeIrProxPagina}}
-                <a href="{{pathFor 'analysis'}}"><button class="btn btn-primary">Proximo</button></a>
-            {{/if}}
-
+            </div>
+            <div class="col-md-4">
+                {{#if podeIrProxPagina}}
+                    <a href="{{pathFor 'analysis'}}">
+                        <button class="btn btn-primary pull-right">Next</button>
+                    </a>
+                {{/if}}
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                     </thead>
                     <tbody>
@@ -25,6 +39,7 @@
             </div>
         </div>
     </div>
+
 
     <!--<div class="container-fluid">-->
 

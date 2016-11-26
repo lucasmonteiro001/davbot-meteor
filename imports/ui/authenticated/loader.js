@@ -79,10 +79,7 @@ Template.loader.onRendered(() => {
                 csvval = null;
 
                 Table.writeInferredValues(dataSet.inferredValues, table, dataSet.header, DefaultValues.DATA_TYPES);
-
-                // coloca um checkbox para opcao de dados hierarquicos
-                Table.drawHierarchicalCheckbox();
-
+                
                 let res = Utilities.getErrorsAndInferredValues(dataSet.inferredValues, dataSet.data);
 
                 dataSet.inferredValues = res.inferredValues;
@@ -124,78 +121,9 @@ const monitorEvents = () => {
         dataSet.inferredValues[index] = select.value;
 
         $('.hierarchicalRow').remove();
-        $('.isHierarchical').find('[type="checkbox"]')[0].checked = false;
+        // $('.isHierarchical').find('[type="checkbox"]')[0].checked = false;
     });
 
-    // Monitor for hierarchical data selected from the user
-    $('.isHierarchical').find('[type="checkbox"]').change( (e) => {
-
-        let checkbox = e.target;
-
-        // If checkbox is selected
-        if(checkbox.checked) {
-
-            Table.writeHierarchicalRow(global.header, global.inferredValues);
-
-            console.warn("TBD!");
-            return false;
-
-            /*$('#genHierarchicalObj').click( () => {
-
-             let correctValues = Utilities.getCorrectValuesOnly(global.content, global.errors);
-             console.log(correctValues);
-             let csv = Utilities.csvToJSON(global.header, correctValues, DefaultValues.DELIMITER),
-             teste = {},
-             groupBy = [],
-             count = 0,
-             row = $('.hierarchicalRow').find('select'),
-             root;
-
-             console.log(row);
-
-             $.each(row, (i, val) => {
-
-             let selectedValue = $(val).val(),
-             headerName = $(val).attr("value");
-
-             if(selectedValue !== '#') {
-
-             groupBy.push(selectedValue);
-             teste[global.header.indexOf($(val).parent().text().split("#")[0])] = global.header.indexOf(selectedValue);
-             } else {
-
-             root = global.header.indexOf($(val).parent().text().split("#")[0]);
-             }
-             });
-
-             let g = [];
-
-             console.log(teste);
-             console.log(g);
-
-             // se groupBy nao for vazio
-             if(groupBy !== []) {
-
-             let groups = groupBy.map( (val) => {
-             return '.key(function(d) { return d.' + val + ';})';
-             });
-
-             let nest = 'return ' + 'd3.nest()' + groups.join('') + '.entries(' + JSON.stringify(csv) + ')',
-             f = new Function(nest);
-
-             console.log(f);
-             console.log(f());
-
-             }
-
-             });*/
-
-        }
-        else {
-
-            $('.hierarchicalRow').remove();
-        }
-    });
 };
 
 function gerarGraficos() {
