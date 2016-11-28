@@ -1,46 +1,57 @@
 <template name="analysis">
 
-    {{_ 'select max cols'}}
+    <div class="row ">
+        <div class="container">
 
-    <div class="cols">
-        {{#each columns}}
-            <div class="checkbox">
-                <label><input type="checkbox" value="{{idx}}">{{name}}</label>
-            </div>
-        {{/each}}
-    </div>
+            <h2>Time to visualize</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
-    <div class="row bot">
-        <div class="col-md-12">
-            <table width="100%" >
-                <tr>
-                    <th> Visualization </th>
-                    <th> Chat </th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="visualization">
-                            <div id="chart" style="max-width: 640px; max-height: 480px">
+            <hr>
+            <h4>{{_ 'select max cols'}} <p class="small">Instruction</p></h4>
 
+
+        <div class="cols">
+            {{#each columns}}
+                <div class="checkbox">
+                    <label><input type="checkbox" value="{{idx}}">{{name}}</label>
+                </div>
+            {{/each}}
+        </div>
+
+        <div class="row bot" style="padding-bottom: 14px; margin-bottom: 30px;">
+            <div class="col-md-12">
+                <table width="100%" >
+                    <tr>
+                        <th> Visualization </th>
+                        <th> Chat </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="visualization">
+                                <div id="chart" style="max-width: 640px; max-height: 480px">
+
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="result">
-                            <p class="server"><span>> This is a text!</span></p>
-                            <p class="server"><span>> Oh really?</span></p>
-                            <p class="server"><span>> That's so cool!!!</span></p>
-                            <p class="server"><span>> Type clear</span></p>
-                        </div>
-                        <div class="chat">
-                            <form id="chat">
-                                <input id="chat-msg" type="text" name="name" value="">
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div><!-- col-md-12-->
-    </div><!-- row -->
+                        </td>
+                        <td>
+                            <div class="result">
+                                <p class="server"><span>> This is a text!</span></p>
+                                <p class="server"><span>> Oh really?</span></p>
+                                <p class="server"><span>> That's so cool!!!</span></p>
+                                <p class="server"><span>> Type clear</span></p>
+                            </div>
+                            <div class="chat">
+                                <form id="chat">
+                                    <input id="chat-msg" type="text" name="name" value="">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- col-md-12-->
+        </div><!-- row -->
+
+        </div>
+    </div>
 
 </template>

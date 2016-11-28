@@ -2,7 +2,23 @@
     <div class="row">
         <div class="col-md-12">
 
-            <nav class="navbar navbar-default">
+            <style>
+                .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+                    color: black;
+                }
+                .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+                    color: black;
+                }
+                .navbar-default .navbar-brand {
+                    color: white;
+                }
+                .navbar-default .navbar-nav>li>a {
+                    color: white;
+                }
+
+            </style>
+
+            <nav class="navbar navbar-default" style="background-color: #428BCA; color: white">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -15,7 +31,7 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <a class="navbar-brand" href="{{pathFor 'index'}}">
-                            <img style="width: 35px; position: relative; bottom: 9px; left: 6px;" src="/img/boticon.png" alt="icon"></a>
+                            <img style="width: 35px; position: relative; bottom: 9px; left: 6px;" src="/img/boticon_white.png" alt="icon"></a>
                         <ul class="nav navbar-nav">
                             <a class="navbar-brand" href="{{pathFor 'index'}}">DavBot</a>
                             <!--<li><a   href="#" name="sysLang"><span id="pt-BR" class="flag-icon flag-icon-br sysLang"></span></a></li>-->

@@ -1,4 +1,26 @@
 <template name="login">
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            margin-top: 30px;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+        .container .text-muted {
+            margin: 20px 0;
+        }
+    </style>
 
     <div class="login-page">
         <div class="form-content">
@@ -32,11 +54,18 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer">
+
+            <div class="footer">
                 <div class="container">
-                    <p class="text-muted pull-right">Developed by <a href="https://www.linkedin.com/in/lucas-pereira-monteiro" target="_blank">lucasmonteiro</a></p>
+                    <p class="text-muted">
+                        <span class="pull-left">Copyright © 2016. DavBot. All rights reserved.</span>
+                <span class="pull-right">Developed by
+                <a href="https://www.linkedin.com/in/lucas-pereira-monteiro">lucasmonteiro</a>
+                    </span>
+                    </p>
                 </div>
-            </footer>
+            </div>
+
         </div>
     </div>
 
