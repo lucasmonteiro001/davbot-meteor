@@ -105,6 +105,9 @@ Template.analysis.events({
             if(selectedColumns.length !== MAX_COLS) {
 
                 addToChat("Select " + MAX_COLS + " columns!", false, 'danger');
+
+                reset();
+
                 return;
             }
             else {
@@ -279,6 +282,9 @@ const draw = () => {
     if(!isPossibleToRenderChart) {
 
         addToChat('Columns selected dont have the right type to render the chart! Please change columns.', false, 'warning');
+
+        reset();
+
         return;
     }
 
