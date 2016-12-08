@@ -225,7 +225,9 @@ const handleChart = (msg) => {
         // eh necessario selecionar 2 colunas
         if(selectedColumns.length !== MAX_COLS) {
 
-            addToChat("Select " + MAX_COLS + " columns!", false, 'danger');
+            addToChat("Select " + MAX_COLS + " columns and restart the process!", false, 'danger');
+
+            reset();
         }
         else {
 
