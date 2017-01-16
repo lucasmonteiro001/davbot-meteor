@@ -23,7 +23,14 @@ const INT = "integer",
     HORIZONTALBARCHART = "horizontal-bar-chart",
     AREACHART = "area-chart",
     BARCHART = "bar-chart",
-    PIECHART = "pie-chart";
+    PIECHART = "pie-chart",
+    BOXPLOT="box-plot",
+    DIVERGING="diverging-bar",
+    DONUTCHART="donut-chart",
+    GROUPED="grouped-bar-chart",
+    MOTION="motion-chart",
+    STACKED="stacked-area",
+    STREAM="stream-graph";
 
 const CHARTS = {
 
@@ -47,20 +54,51 @@ const CHARTS = {
 const fuzzy = require('./fuzzy');
 
 const f = (term, charts) => {
-    return {term, charts};
+    terms.push({term, charts});
 };
 
 //FIXME aquisicao de termos eh estatica
 // let terms = Terms.find().fetch();
-let terms = [];
+terms = [];
 
-terms.push(f("correlation", [SCATTERPLOT]));
-terms.push(f("deviation", [LINECHART]));
-terms.push(f("distribution", [LINECHART, VERTICALBARCHART]));
-terms.push(f("ranking", [HORIZONTALBARCHART]));
-terms.push(f("time series", [LINECHART, VERTICALBARCHART, AREACHART]));
-terms.push(f("part-to-whole", [PIECHART, VERTICALBARCHART]));
-terms.push(f("test", []));
+const ALL = [AREACHART, VERTICALBARCHART, BOXPLOT, DIVERGING, DONUTCHART, GROUPED, HORIZONTALBARCHART, LINECHART, MOTION, PIECHART, SCATTERPLOT, STACKED, STREAM];
+
+f("correlation", [SCATTERPLOT]);
+f("deviation", [LINECHART]);
+f("distribution", [LINECHART, VERTICALBARCHART]);
+f("ranking", [HORIZONTALBARCHART]);
+f("time series", [LINECHART, VERTICALBARCHART, AREACHART]);
+f("part-to-whole", [PIECHART, VERTICALBARCHART]);
+f("Accessing details on demand", ALL);
+f("Adding variables", ALL);
+f("Aggregating", ALL);
+f("Alternating differences", BARCHART, SCATTERPLOT, STACKED);
+f("Center", BARCHART, LINECHART, SCATTERPLOT);
+f("Comparing", [AREACHART, VERTICALBARCHART, BOXPLOT, DIVERGING, DONUTCHART, GROUPED, HORIZONTALBARCHART, LINECHART, MOTION, PIECHART, STACKED, STREAM]);
+f("Correlation", SCATTERPLOT);
+f("Covariation", GROUPED, SCATTERPLOT);
+f("Details-On-Demand", [AREACHART, VERTICALBARCHART, BOXPLOT, DIVERGING, DONUTCHART, GROUPED, HORIZONTALBARCHART, LINECHART, MOTION, PIECHART, SCATTERPLOT, STACKED, STREAM]);
+f("Deviation", LINECHART);
+f("Distribution", BARCHART, LINECHART);
+f("Exceptions", ALL);
+f("Filter", ALL);
+f("Filtering", ALL);
+f("Gaps", BARCHART, LINECHART, SCATTERPLOT);
+f("Increasingly different", BARCHART, SCATTERPLOT);
+f("Non-uniformly different", BARCHART, SCATTERPLOT);
+f("Overlapped time scales", LINECHART);
+f("Part-to-whole", PIECHART, BARCHART, STACKED);
+f("Ranking", BARCHART);
+f("Re-expressing", ALL);
+f("Re-scaling", LINECHART);
+f("Re-visualizing", ALL);
+f("Reference lines and regions", ALL);
+f("Sorting", BARCHART);
+f("Spread", BARCHART, SCATTERPLOT);
+f("Time series", AREACHART, BARCHART, LINECHART);
+f("Trend", LINECHART);
+f("Uniform", BARCHART, HORIZONTALBARCHART, SCATTERPLOT);
+f("Variability", BARCHART, LINECHART);
 
 if(terms && terms.length > 0) {
 
@@ -126,8 +164,7 @@ Meteor.methods({
     'chat.existsChart' (name) {
 
         if(!CHARTS[name]) {
-            Meteor.error('Chart does not exist!');
-            return;
+            throw new Error('Chart does not exist!');
         }
 
         return CHARTS[name];

@@ -216,7 +216,7 @@ const handleChart = (msg) => {
     Meteor.call('chat.existsChart', chartName, (err, result) => {
 
         if(err) {
-            addToChat(err.reason, false, 'danger');
+            addToChat('Chart does not exist yet!', false, 'danger');
             return;
         }
 
