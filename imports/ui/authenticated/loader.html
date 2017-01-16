@@ -10,7 +10,7 @@
             <p>This chat bot helps you to understand your data and also suggest the best way of interpreting it given
             its characteristics.</p>
             <p>In order to <b>start</b>, upload the csv file (comma separator) that you wish to analyze.</p>
-            <p>Also, after your file has been uploaded, we make a short analysis to try to infer the type of data
+            <p>Also, after your file has been uploaded, we make a short analysis to try to infer the type of data (String, Date, Integer, Real)
             of each column. You can change it right now if you think that the data has a different type.</p>
             <p>Lastly, we also try to identify wrong rows that do not match with the majority of others type and highlight
             them in red so you can correct your data before submitting it to be analysed.</p>
@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 {{#if podeIrProxPagina}}
                     <a href="{{pathFor 'analysis'}}">
-                        <button class="btn btn-primary pull-right">Next step</button>
+                        <button class="btn btn-success pull-right">Next step</button>
                     </a>
                 {{/if}}
             </div>

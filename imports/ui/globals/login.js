@@ -20,6 +20,17 @@ Template.login.events({
             }
         });
 
+    },
+    'click #lognow'() {
+
+        Meteor.loginWithPassword('monografia@dcc.ufmg.br', 'monografia', function(error) {
+            if(error) {
+                Bert.alert(error.reason, 'danger', 'fixed-top', 'fa-frown-o');
+            }
+            else {
+                FlowRouter.go('loader');
+            }
+        });
     }
 
 });

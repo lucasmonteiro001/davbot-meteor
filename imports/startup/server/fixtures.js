@@ -1,8 +1,8 @@
 import { Terms } from '../../api/terms/terms';
 
 const admin = {
-    email: 'admin@admin',
-    password: 'asdfasdf',
+    email: 'monografia@dcc.ufmg.br',
+    password: 'monografia',
     nome: 'nome do administrador',
     roles: ['administrador']
 };

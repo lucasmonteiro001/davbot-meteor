@@ -28,6 +28,8 @@ Template.analysis.onCreated(() => {
     // possiveis configuracoes para renderizar o grafico selecionado
     template.possibleColumns = new ReactiveVar(null);
 
+    return
+
     try {
         if(!dataSet) {
             FlowRouter.go('loader');
@@ -48,6 +50,11 @@ Template.analysis.helpers({
 });
 
 Template.analysis.events({
+    'click #see'() {
+
+
+
+    },
     'change input[type="checkbox"]': () => {
 
         // selected checkbox

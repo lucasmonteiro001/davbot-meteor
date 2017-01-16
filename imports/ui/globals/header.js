@@ -19,6 +19,7 @@ Template.header.onRendered(() => {
 Template.header.events({
     'click #logout': () => {
         Meteor.logout();
+        FlowRouter.go('index')
     },
     'click span.sysLang': (evt) => {
 
