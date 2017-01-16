@@ -99,6 +99,14 @@ Template.loader.onRendered(() => {
     });
 });
 
+Template.loader.events({
+
+    'click #file-sample'() {
+
+    }
+
+});
+
 Template.loader.helpers({
     podeIrProxPagina() {
         return template.podeIrProxPagina.get();
