@@ -11,11 +11,11 @@
             <p>You can type as many terms as you want, if the term is not available, a message “no word found” will be shown. Each found term consists of one or more chart options so you can choose one the better fits your needs.</p>
             <p>Tip: if you want erase the chat, just type ‘clear’.</p>
 
+            <button style="margin-bottom: 10px" id="see" class="btn btn-default">See all terms</button>
+
             <hr>
 
             <h4>{{_ 'select max cols'}} <p class="small">Instruction</p></h4>
-
-            <button style="margin-bottom: 10px" id="see" class="btn btn-primary">See all terms</button>
 
 
         <div class="cols">
@@ -62,4 +62,34 @@
         </div>
     </div>
 
+    {{> termsModal}}
+
+</template>
+
+<template name="termsModal">
+    <div class="modal fade">
+        <div class="modal-dialog" style="width: 85%;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Available terms</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    Green boxes means that the term may render the chart in the correspondent column.
+
+                    <hr>
+
+                    <img src="/mapeamento-termos-graficos.png" alt="terms">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </template>
